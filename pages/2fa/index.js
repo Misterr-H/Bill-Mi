@@ -2,7 +2,7 @@ import Head from "next/head";
 import OtpInput from "react-otp-input";
 import {AuthButton} from "../../components/Buttons";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {API_URL} from "../../utils/constants";
 import {login} from "../../utils/Auth";
@@ -14,11 +14,12 @@ const TwoFactorAuth = () => {
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async (otpp) => {
         setIsSubmitting(true);
         await axios.post(`${API_URL}/auth/verify-2fa`, {
             miId,
-            code: otp,
+            code: otp.length === 6 ? otp : otpp,
             rememberMe,
         })
             .then((res) => {
@@ -67,7 +68,15 @@ const TwoFactorAuth = () => {
                 <div className="mt-6 space-y-6">
                         <OtpInput
                             value={otp}
-                            onChange={otp => setOtp(otp)}
+                            onChange={otp => {
+                                setOtp(otp);
+                                if(otp.length === 6) {
+                                    handleSubmit(otp);
+                                }
+
+                            }
+
+                            }
                             numInputs={6}
                             separator={<span>-</span>}
                             inputStyle={{
@@ -78,6 +87,7 @@ const TwoFactorAuth = () => {
                                 border: "2px solid rgba(0,0,0,0.3)",
                                 text: "black",
                             }}
+                            shouldAutoFocus={true}
                         />
                     <span className={'text-red-500 font-sans text-xs'}>{error}</span>
 

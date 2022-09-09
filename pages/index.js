@@ -3,8 +3,30 @@ import NewInvoice from "../components/NewInvoice";
 import {ClientsChip, InvoicesChip, ProductSoldChip, RevenueChip} from "../components/Chip";
 import HomePageTable from "../components/HomePageTable";
 import Link from "next/link";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
+import {isAuthenticated, isLoggedIn} from "../utils/Auth";
+
+
 
 const Home = () => {
+    const router = useRouter();
+    const [isLogged, setIsLogged] = useState(false);
+
+    useEffect(() => {
+        setIsLogged(isLoggedIn());
+        if(!isLoggedIn()) {
+            router.push("/login")
+                .then(() => window.scrollTo(0, 0));
+        }
+        isAuthenticated()
+            .then((res) => {
+                if(!res) {
+                    router.push("/login")
+                        .then(() => window.scrollTo(0, 0));
+                }
+            })
+    }, []);
     const columns = [
         {
             title: 'Client',
@@ -62,7 +84,7 @@ const Home = () => {
     ]
 
 
-  return (
+  return isLogged ? (
     <div className={'flex mt-20 px-20'}>
         <Head>
             <title>Bill Mi</title>
@@ -92,7 +114,7 @@ const Home = () => {
 
         </div>
     </div>
-  );
+  ): null;
 }
 
 export default Home;

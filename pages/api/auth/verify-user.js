@@ -2,7 +2,7 @@ import connectDB from "../../../utils/connectDB";
 import User from "../../../models/userModel";
 import bcrypt from "bcrypt";
 
-export default async function Verify(req, res) {
+export default async function VerifyUser(req, res) {
     const { miId, password } = req.body;
     await connectDB();
     const user = await User.findOne({ miId });

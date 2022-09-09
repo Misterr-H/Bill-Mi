@@ -9,10 +9,12 @@ import {useRouter} from "next/router";
 const Register = () => {
     const router = useRouter();
     const miIdref = useRef();
+    const nameRef = useRef();
     const passwordRef = useRef();
     const has2FARef = useRef();
 
     const [miId, setMiId] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [has2FA, setHas2FA] = useState(false);
     const [error, setError] = useState("");
@@ -20,11 +22,13 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         setMiId(miIdref.current.value);
+        setName(nameRef.current.value);
         setPassword(passwordRef.current.value);
         setHas2FA(has2FARef.current.checked);
         setIsSubmitting(true);
         await axios.post(`${API_URL}/auth/add-user`, {
             miId,
+            name,
             password,
             has2FA,
         })
@@ -91,6 +95,21 @@ const Register = () => {
                                     placeholder="Mi ID"
                                     onChange={(e) => setMiId(e.target.value)}
                                     ref={miIdref}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="miId" className="sr-only">
+                                    Name
+                                </label>
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="Name"
+                                    onChange={(e) => setName(e.target.value)}
+                                    ref={nameRef}
                                 />
                             </div>
                             <div>

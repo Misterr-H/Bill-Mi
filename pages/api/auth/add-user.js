@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const twoFactor = require("node-2fa");
 
 export default async function AddUser(req, res) {
-    const { miId, password, has2FA } = req.body;
+    const { miId, name, password, has2FA } = req.body;
     await connectDB();
     const user = await User.findOne({ miId });
     if (user) {
@@ -15,6 +15,7 @@ export default async function AddUser(req, res) {
         const newSecret = twoFactor.generateSecret({ name: "Bill Mi", account: miId });
         const newUser = new User({
             miId,
+            name,
             password: hash,
             has2FA,
             secret2FA: newSecret.secret,

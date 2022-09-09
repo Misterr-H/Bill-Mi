@@ -21,7 +21,7 @@ const TableRow = ({data}) => {
                 Object.keys(data).map((item, index) => {
                     return (
                         item === 'status' ? (
-                                <div className={'p-1 bg-[#E1FFEF] flex rounded-full h-8 my-auto w-12 justify-center items-center'}>
+                                <div key={index} className={'p-1 bg-[#E1FFEF] flex rounded-full h-8 my-auto w-12 justify-center items-center'}>
                                     <span className={'text-xs font-sans font-bold mx-auto text-[#18D84A]'}>{data[item]}</span>
                                 </div>
                         ): (
