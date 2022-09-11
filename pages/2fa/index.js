@@ -4,7 +4,6 @@ import {AuthButton} from "../../components/Buttons";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {API_URL} from "../../utils/constants";
 import {login} from "../../utils/Auth";
 
 const TwoFactorAuth = () => {
@@ -17,7 +16,7 @@ const TwoFactorAuth = () => {
 
     const handleSubmit = async (otpp) => {
         setIsSubmitting(true);
-        await axios.post(`${API_URL}/auth/verify-2fa`, {
+        await axios.post(`/auth/verify-2fa`, {
             miId,
             code: otp.length === 6 ? otp : otpp,
             rememberMe,

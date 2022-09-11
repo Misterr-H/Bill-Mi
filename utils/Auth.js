@@ -98,3 +98,81 @@ export const getMiId = () => {
         return localStorage.getItem('miId');
     }
 }
+
+export const get2FAStatus = async () => {
+    if(!ISSERVER) {
+        let token = localStorage.getItem('token');
+        if(token) {
+            const res = await fetch('/api/user/fetch-user-details', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            const data = await res.json();
+            if(data.status === 'success') {
+                return data.data.has2FA;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+}
+
+export const update2FAStatus = async (status) => {
+    if(!ISSERVER) {
+        let token = localStorage.getItem('token');
+        if(token) {
+            const res = await fetch('/api/auth/update-2fa', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    status
+                })
+            })
+            const data = await res.json();
+            if(data.status === 'success') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+}
+
+export const get2FAQrCode = async () => {
+    if(!ISSERVER) {
+        let token = localStorage.getItem('token');
+        if(token) {
+            const res = await fetch('/api/user/fetch-2fa-qr', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            const data = await res.json();
+            if(data.status === 'success') {
+                return data.data;
+            }
+            else {
+                return null;
+            }
+        }
+    }
+}

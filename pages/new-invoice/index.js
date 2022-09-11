@@ -28,6 +28,14 @@ const newInvoice = () => {
                             <label className={'text-gray-400'}>To</label>
                             <input className={'border border-gray-300 rounded-md px-4 py-2 mt-2'} type="text" placeholder={'Enter client name'}/>
                         </div>
+                        <div className={'flex flex-col mt-10'}>
+                            <label className={'text-gray-400'}>Invoice Date</label>
+                            <input className={'border border-gray-300 rounded-md px-4 py-2 mt-2'} type="date" placeholder={'Enter client name'}/>
+                        </div>
+                        <div className={'flex flex-col mt-10'}>
+                            <label className={'text-gray-400'}>Due Date</label>
+                            <input className={'border border-gray-300 rounded-md px-4 py-2 mt-2'} type="date" placeholder={'Enter client name'}/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,9 @@ module.exports = {
         "blue-box": "url('/2.png')",
         "orange-box": "url('/3.png')",
         "gray-box": "url('/4.png')",
+      },
+      fontSize: {
+        "xxs": ".5rem",
       }
     },
   },

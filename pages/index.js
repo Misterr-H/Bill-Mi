@@ -85,15 +85,16 @@ const Home = () => {
 
 
   return isLogged ? (
-    <div className={'flex mt-20 px-20'}>
+    <div className={'flex md:flex-row flex-col mt-10 md:mt-20 lg:px-20'}>
         <Head>
             <title>Bill Mi</title>
             <link rel="icon" href="/logo.svg" />
         </Head>
+        <h1 className={'text-2xl ml-5 md:hidden font-bold'}>Dashboard</h1>
         <NewInvoice/>
-        <div className={'flex flex-col ml-12 w-full'}>
+        <div className={'flex flex-col md:ml-12 w-full'}>
             <div>
-                <h1 className={'text-2xl font-bold'}>Dashboard</h1>
+                <h1 className={'text-2xl hidden md:inline font-bold'}>Dashboard</h1>
             </div>
             <div className={'flex justify-between w-full mt-10'}>
                 <InvoicesChip/>
@@ -101,8 +102,8 @@ const Home = () => {
                 <RevenueChip/>
                 <ProductSoldChip/>
             </div>
-            <div className={'bg-[#FDFDFD] w-full p-10'}>
-                <div className={'bg-white rounded-3xl p-10  shadow-sm'}>
+            <div className={'bg-[#FDFDFD] w-full md:p-10'}>
+                <div className={'bg-white rounded-3xl md:mt-0 mt-5 px-2 py-4 md:p-10  shadow-sm'}>
                     <h1 className={'text-xl'}>Recent invoices</h1>
                     <HomePageTable columns={columns} data={data}/>
                     <div className={'flex justify-between mt-4'}>

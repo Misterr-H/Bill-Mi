@@ -28,17 +28,19 @@ const Navbar = () => {
 
     return (
         <div className={'flex justify-between p-2 mt-5'}>
-            <div className={'flex items-center ml-5 cursor-pointer hover:scale-105 duration-200'}>
+            <div className={'flex -mt-1 items-center md:mr-0 mr-2 md:ml-5 cursor-pointer hover:scale-105 duration-200'}>
                 <Image src={'/logo.svg'} width={30} height={30}/>
-                <h1 className={'ml-2 mt-1 cursor-pointer'}>Bill Mi</h1>
+                <h1 className={'ml-2 mt-1 md:inline hidden cursor-pointer md:text-md text-xs'}>Bill Mi</h1>
             </div>
-            <div className={'flex items-center'}>
-                <Link href={'/'}><a className={`mr-5 hover:scale-105 duration-200 ${router.pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><DashboardIcon fontSize={'small'} className={'mb-1 mr-1'}/>Dashboard</a></Link>
-                <Link href={'/invoices'}><a className={`mr-5 hover:scale-105 duration-200 ${router.pathname === '/invoices' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><ReceiptIcon fontSize={'small'} className={'mb-1 mr-1'}/>Invoices</a></Link>
-                <Link href={'/clients'}><a className={`mr-5 hover:scale-105 duration-200 ${router.pathname === '/clients' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><PeopleOutlineIcon fontSize={'small'} className={'mb-1 mr-1'}/>Clients</a></Link>
-                <Link href={'/new-invoice'}><a className={`mr-5 hover:scale-105 duration-200 ${router.pathname === '/new-invoice' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><AddIcon fontSize={'small'} className={'mb-1 mr-1'}/>New invoice</a></Link>
+
+            <div className={'flex flex-wrap items-center justify-center'}>
+                <Link href={'/'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><DashboardIcon fontSize={'small'} className={'mb-1 mr-1'}/>Dashboard</a></Link>
+                <Link href={'/invoices'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/invoices' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><ReceiptIcon fontSize={'small'} className={'mb-1 mr-1'}/>Invoices</a></Link>
+                <Link href={'/clients'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/clients' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><PeopleOutlineIcon fontSize={'small'} className={'mb-1 mr-1'}/>Clients</a></Link>
+                <Link href={'/new-invoice'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/new-invoice' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><AddIcon fontSize={'small'} className={'mb-1 mr-1'}/>New invoice</a></Link>
             </div>
-            <div className={'flex mr-5'}>
+
+            <div className={'flex md:mr-5'}>
                 <Tooltip title={'Profile'} TransitionComponent={Zoom} disableInteractive enterDelay={1000}>
                     <div className={`flex
                     cursor-pointer
@@ -52,19 +54,19 @@ const Navbar = () => {
                                 window.scrollTo(0, 0)
                             })
                     }}>
-                            <FaceIcon fontSize={'small'} className={'mb-1 mr-1'}/>
-                        <div className={'flex flex-col'}>
-                            <h1 className={'mr-5 cursor-pointer'}>{loading ? <Skeleton width={70} sx={{
+                            <FaceIcon fontSize={'small'} className={'md:mb-1 md:mt-0 mt-1 mr-2 md:mr-1'}/>
+                        <div className={'flex md:inline hidden flex-col'}>
+                            <h1 className={'md:mr-5 md:text-base text-xxs cursor-pointer'}>{loading ? <Skeleton width={70} sx={{
                                 marginTop: '-0.2rem',
                             }}/> : name}</h1>
-                            <h1 className={'mr-5 -mt-1 text-[10px] cursor-pointer text-gray-400'}>{loading ? <Skeleton width={70} sx={{
+                            <h1 className={'md:mr-5 md:text-md text-xxs -mt-1 text-[10px] cursor-pointer text-gray-400'}>{loading ? <Skeleton width={70} sx={{
                                 marginTop: '-0.2rem',
                             }}/> : `Mi id: ${miId}`}</h1>
                         </div>
                     </div>
                 </Tooltip>
                 <Tooltip title={'Logout'} TransitionComponent={Zoom} disableInteractive enterDelay={1000}>
-                    <div className={'flex cursor-pointer hover:scale-110 duration-200'}>
+                    <div className={'flex cursor-pointer hover:scale-110 duration-200 items-center'}>
                             <LogoutIcon fontSize={'small'} className={'mb-1 mr-1'} onClick={() => {
                                 logout();
                                 router.push('/login');

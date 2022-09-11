@@ -16,11 +16,9 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
-            {(router.pathname === '/login' || router.pathname === '/register' || router.pathname === '/2fa' || router.pathname === '/enable-2fa' || !isLogged ) ? null : <Navbar/>}
+            {(router.pathname === '/login' || router.pathname === '/register' || router.pathname === '/2fa' || router.pathname === '/enable-2fa' || router.pathname === '/fill-details' || !isLogged ) ? null : <Navbar/>}
             <PageTransition>
-                {
                     <Component {...pageProps} />
-                }
             </PageTransition>
         </>
 

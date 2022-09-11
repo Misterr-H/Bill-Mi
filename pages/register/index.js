@@ -2,7 +2,6 @@ import {AuthButton} from "../../components/Buttons";
 import Head from "next/head";
 import {useState, useRef} from "react";
 import axios from "axios";
-import {API_URL} from "../../utils/constants";
 import {useRouter} from "next/router";
 
 
@@ -26,7 +25,7 @@ const Register = () => {
         setPassword(passwordRef.current.value);
         setHas2FA(has2FARef.current.checked);
         setIsSubmitting(true);
-        await axios.post(`${API_URL}/auth/add-user`, {
+        await axios.post(`/auth/add-user`, {
             miId,
             name,
             password,

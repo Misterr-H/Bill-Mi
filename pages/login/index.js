@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 import {useState, useRef} from "react";
 import axios from "axios";
 import {login} from "../../utils/Auth";
-import {API_URL} from "../../utils/constants";
 
 const Login = () => {
 
@@ -19,7 +18,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         setIsSubmitting(true);
-        await axios.post(`${API_URL}/auth/login`, {
+        await axios.post(`/auth/login`, {
             miId,
             password,
             rememberMe,
