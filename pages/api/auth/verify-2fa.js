@@ -1,5 +1,5 @@
 import connectDB from "../../../utils/connectDB";
-import User from "../../../models/userModel";
+import User from "../../../models/UserModel";
 const twoFactor = require('node-2fa');
 const jwt = require('jsonwebtoken');
 

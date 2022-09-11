@@ -1,5 +1,5 @@
 import connectDB from "../../../utils/connectDB";
-import User from '../../../models/userModel';
+import User from '../../../models/UserModel';
 import VerifyJWT from "../auth/verify-jwt";
 
 export default async function FetchUserDetails(req, res) {

@@ -1,5 +1,5 @@
 import connectDB from "../../../utils/connectDB";
-import User from "../../../models/userModel";
+import User from "../../../models/UserModel";
 import bcrypt from "bcrypt";
 const jwt = require('jsonwebtoken');
 
