@@ -25,7 +25,7 @@ const Register = () => {
         setPassword(passwordRef.current.value);
         setHas2FA(has2FARef.current.checked);
         setIsSubmitting(true);
-        await axios.post(`/auth/add-user`, {
+        await axios.post(`/api/auth/add-user`, {
             miId,
             name,
             password,

@@ -16,7 +16,7 @@ const TwoFactorAuth = () => {
 
     const handleSubmit = async (otpp) => {
         setIsSubmitting(true);
-        await axios.post(`/auth/verify-2fa`, {
+        await axios.post(`/api/auth/verify-2fa`, {
             miId,
             code: otp.length === 6 ? otp : otpp,
             rememberMe,

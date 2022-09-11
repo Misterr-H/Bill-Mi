@@ -18,7 +18,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         setIsSubmitting(true);
-        await axios.post(`/auth/login`, {
+        await axios.post(`/api/auth/login`, {
             miId,
             password,
             rememberMe,
