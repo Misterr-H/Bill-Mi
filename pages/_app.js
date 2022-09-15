@@ -1,10 +1,10 @@
-import '../styles/globals.css'
+import '../styles/style.scss'
 import Navbar from "../components/Navbar";
 import {useRouter} from "next/router";
 import PageTransition from "../components/PageTransition";
 import {isLoggedIn} from "../utils/Auth";
 import {useEffect, useState} from "react";
-
+import {wrapper} from "../store/store";
 
 
 function MyApp({ Component, pageProps }) {
@@ -25,4 +25,4 @@ function MyApp({ Component, pageProps }) {
     )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp);

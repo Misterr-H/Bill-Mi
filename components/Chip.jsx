@@ -25,7 +25,7 @@ export const ClientsChip = () => {
             </div>
             <div className={'flex flex-col w-[53%] ml-1 lg:ml-5'}>
                 <h1 className={'text-xxs lg:text-xs '}>Clients</h1>
-                <h1 className={'mt-1 lg:text-xl text-xs font-bold '}>659</h1>
+                <h1 className={'mt-1 lg:text-xl text-xs font-bold '}>6599</h1>
             </div>
         </div>
     )

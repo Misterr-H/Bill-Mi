@@ -11,6 +11,7 @@ import {getMiId, getName, logout} from "../utils/Auth";
 import {Skeleton, Zoom} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Tooltip} from "@mui/material";
+import {motion} from "framer-motion";
 
 const Navbar = () => {
     const router = useRouter();
@@ -34,10 +35,10 @@ const Navbar = () => {
             </div>
 
             <div className={'flex flex-wrap items-center justify-center'}>
-                <Link href={'/'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><DashboardIcon fontSize={'small'} className={'mb-1 mr-1'}/>Dashboard</a></Link>
-                <Link href={'/invoices'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/invoices' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><ReceiptIcon fontSize={'small'} className={'mb-1 mr-1'}/>Invoices</a></Link>
-                <Link href={'/clients'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/clients' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><PeopleOutlineIcon fontSize={'small'} className={'mb-1 mr-1'}/>Clients</a></Link>
-                <Link href={'/new-invoice'}><a className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/new-invoice' ? 'text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><AddIcon fontSize={'small'} className={'mb-1 mr-1'}/>New invoice</a></Link>
+                <Link href={'/'}><motion.a whileHover={{scale:1.05}} className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-500 ${router.pathname === '/' ? 'text-primary hover:text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><DashboardIcon fontSize={'small'} className={'mb-1 mr-1'}/>Dashboard</motion.a></Link>
+                <Link href={'/invoices'}><motion.a whileHover={{scale:1.05}} className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/invoices' ? 'text-primary hover:text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><ReceiptIcon fontSize={'small'} className={'mb-1 mr-1'}/>Invoices</motion.a></Link>
+                <Link href={'/clients'}><motion.a whileHover={{scale:1.05}} className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/clients' ? 'text-primary hover:text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><PeopleOutlineIcon fontSize={'small'} className={'mb-1 mr-1'}/>Clients</motion.a></Link>
+                <Link href={'/new-invoice'}><motion.a whileHover={{scale:1.05}} className={`mr-2 md:text-md text-xs md:mr-5 hover:scale-105 duration-200 ${router.pathname === '/new-invoice' ? 'text-primary hover:text-primary' : 'text-gray-400 hover:text-secondaryLight duration-300'}`}><AddIcon fontSize={'small'} className={'mb-1 mr-1'}/>New invoice</motion.a></Link>
             </div>
 
             <div className={'flex md:mr-5'}>

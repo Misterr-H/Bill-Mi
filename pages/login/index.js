@@ -36,7 +36,7 @@ const Login = () => {
                     }
                     else {
                         login(miId, res.data.token);
-                        router.push("/");
+                        router.push("/fill-details");
                     }
                 }
                 else {

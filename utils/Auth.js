@@ -176,3 +176,19 @@ export const get2FAQrCode = async () => {
         }
     }
 }
+
+export const isDetailsFilled = () => {
+    if(!ISSERVER) {
+        let posId = localStorage.getItem('posId');
+        let storeName = localStorage.getItem('storeName');
+        let storeCity = localStorage.getItem('storeCity');
+        let storeState = localStorage.getItem('storeState');
+
+        if(posId && storeName && storeCity && storeState) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}

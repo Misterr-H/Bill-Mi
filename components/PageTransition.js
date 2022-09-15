@@ -6,7 +6,7 @@ const PageTransition = ({children}) => {
 
     return (
         <AnimatePresence
-            exitBeforeEnter
+            mode={'wait'}
             initial={false}
         >
             <motion.div

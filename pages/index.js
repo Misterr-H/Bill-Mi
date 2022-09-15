@@ -5,7 +5,7 @@ import HomePageTable from "../components/HomePageTable";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
-import {isAuthenticated, isLoggedIn} from "../utils/Auth";
+import {isAuthenticated, isDetailsFilled, isLoggedIn} from "../utils/Auth";
 
 
 
@@ -25,7 +25,11 @@ const Home = () => {
                     router.push("/login")
                         .then(() => window.scrollTo(0, 0));
                 }
+                else if(!isDetailsFilled()) {
+                    router.push("/fill-details")
+                }
             })
+
     }, []);
     const columns = [
         {

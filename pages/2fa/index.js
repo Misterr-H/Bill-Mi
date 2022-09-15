@@ -24,7 +24,7 @@ const TwoFactorAuth = () => {
             .then((res) => {
                 if(res.status === 200) {
                     login(miId, res.data.token);
-                    router.push("/");
+                    router.push("/fill-details");
                 }
                 else {
                     setError(res.data.error);
