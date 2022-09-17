@@ -19,6 +19,7 @@ const Home = () => {
     const [totalClients, setTotalClients] = useState(0);
     const [totalProductsSold, setTotalProductsSold] = useState(0);
     const [tableData, setTableData] = useState([]);
+    const [graphData, setGraphData] = useState([]);
 
     useEffect(() => {
         setIsLogged(isLoggedIn());
@@ -52,6 +53,14 @@ const Home = () => {
                                 date: invoice.date.split("T")[0].split("-").reverse().join("/"),
                                 amount: invoice.total,
                                 status: "Paid",
+                            }]);
+                        });
+                    }
+                    if(graphData.length === 0) {
+                        res.data.dateWiseRevenueData.forEach((data) => {
+                            setGraphData((prev) => [...prev, {
+                                name: data.date.split("T")[0].split("-").reverse()[0] + '-' + data.date.split("T")[0].split("-").reverse()[1],
+                                amount: data.revenue,
                             }]);
                         });
                     }
@@ -127,7 +136,7 @@ const Home = () => {
             <link rel="icon" href="/logo.svg" />
         </Head>
         <h1 className={'text-2xl ml-5 md:hidden font-bold'}>Dashboard</h1>
-        <NewInvoice/>
+        <NewInvoice graph={graphData}/>
         <div className={'flex flex-col md:ml-12 w-full'}>
             <div>
                 <h1 className={'text-2xl hidden md:inline font-bold'}>Dashboard</h1>
@@ -143,8 +152,8 @@ const Home = () => {
                     <h1 className={'text-xl'}>Recent invoices</h1>
                     <HomePageTable columns={columns} data={tableData}/>
                     <div className={'flex justify-between mt-4'}>
-                        <span className={'text-secondaryLight'}>Showing 5 out of 1200</span>
-                        <Link href={'/invoices'}><span className={'mr-16 cursor-pointer hover:translate-x-3 duration-300'}>See all &#8594;</span></Link>
+                        {/*<span className={'text-secondaryLight'}>Showing 5 out of 1200</span>*/}
+                        <Link href={'/invoices'}><span className={'mr-16 ml-auto cursor-pointer hover:translate-x-3 duration-300'}>See all &#8594;</span></Link>
                     </div>
                 </div>
             </div>

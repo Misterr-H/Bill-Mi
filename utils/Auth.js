@@ -183,12 +183,36 @@ export const isDetailsFilled = () => {
         let storeName = localStorage.getItem('storeName');
         let storeCity = localStorage.getItem('storeCity');
         let storeState = localStorage.getItem('storeState');
+        let storeType = localStorage.getItem('storeType');
 
-        if(posId && storeName && storeCity && storeState) {
+        if(posId && storeName && storeCity && storeState && storeType) {
             return true;
         }
         else {
             return false;
+        }
+    }
+}
+
+export const getStoreDetails = () => {
+    if(!ISSERVER) {
+        let posId = localStorage.getItem('posId');
+        let storeName = localStorage.getItem('storeName');
+        let storeCity = localStorage.getItem('storeCity');
+        let storeState = localStorage.getItem('storeState');
+        let storeType = localStorage.getItem('storeType');
+
+        if(posId && storeName && storeCity && storeState) {
+            return {
+                posId,
+                storeType,
+                storeName,
+                storeCity,
+                storeState
+            }
+        }
+        else {
+            return null;
         }
     }
 }

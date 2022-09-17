@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 
 const FillDetails = () => {
     const router = useRouter();
+    const [storeType, setStoreType] = useState("MI Home");
     const [nearestStoreName, setNearestStoreName] = useState("Auto Detecting Location...");
     const [nearestStoreCity, setNearestStoreCity] = useState("Please allow permission to detect location");
     const [nearestStoreState, setNearestStoreState] = useState("");
@@ -77,6 +78,7 @@ const FillDetails = () => {
             localStorage.setItem("storeName", nearestStoreName);
             localStorage.setItem("storeCity", nearestStoreCity);
             localStorage.setItem("storeState", nearestStoreState);
+            localStorage.setItem("storeType", storeType);
             router.push("/");
         }
 
@@ -99,9 +101,11 @@ const FillDetails = () => {
             <div className={'flex items-center mt-10'}>
                 <h1 className={'mr-4 '}>Choose Store Type:</h1>
 
-                <select className={''} name="storeType" id="storeType">
-                    <option value="home">Mi Home</option>
-                    <option value="store">Mi Store</option>
+                <select onChange={(e) => {
+                    setStoreType(e.target.value);
+                }} className={''} name="storeType" id="storeType">
+                    <option value="MI Home">Mi Home</option>
+                    <option value="MI Store">Mi Store</option>
                 </select>
             </div>
             <div>
