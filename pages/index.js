@@ -59,7 +59,7 @@ const Home = () => {
                 })
         }
         fetchData().then(() => {
-            setTableData(tableData.slice(0, tableData.length/2));
+            // setTableData(tableData.slice(0, tableData.length/2));
         });
 
     }, []);
