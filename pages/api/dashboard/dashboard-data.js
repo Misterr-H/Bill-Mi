@@ -1,6 +1,7 @@
 import connectDB from "../../../utils/connectDB";
 import Invoice from "../../../models/InvoiceModel";
 import Stats from "../../../models/statsModel";
+import DateWiseRevenue from "../../../models/DateWiseRevenueModel";
 import VerifyJWT from "../auth/verify-jwt";
 
 export default async function NewInvoice(req, res) {
@@ -12,10 +13,12 @@ export default async function NewInvoice(req, res) {
                 const {miId} = req.user;
                 const statsData = await Stats.findOne({id: '123'});
                 const invoiceData = await Invoice.find().sort({date: -1}).limit(5).populate('client').populate('createdBy', 'name miId');
+                const dateWiseRevenueData = await DateWiseRevenue.find().sort({date: -1}).limit(7);
                 res.status(200).json({
                     status: "success",
                     statsData,
                     invoiceData,
+                    dateWiseRevenueData,
                 });
             });
             break;

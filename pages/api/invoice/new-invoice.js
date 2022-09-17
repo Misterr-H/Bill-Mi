@@ -55,7 +55,7 @@ export default async function NewInvoice(req, res) {
                     total: total,
                     totalQuantity: totalQuantity,
                     createdBy: user._id,
-                    date: new Date(),
+                    date: new Date().toLocaleString('en-US', {timeZone: 'Asia/Kolkata'}),
                 });
                 await Clients.findOneAndUpdate({phone: client.phone}, {
                     $push: {
