@@ -26,6 +26,14 @@ const invoiceSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    totalQuantity: {
+        type: Number,
+        required: true,
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }
 })
 
 export default models.Invoice || model('Invoice', invoiceSchema)

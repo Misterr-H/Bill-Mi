@@ -1,20 +1,70 @@
-import {selectProducts} from "../store/choosedProductsState";
+import {selectProducts, selectTotal} from "../store/choosedProductsState";
 import {useSelector} from "react-redux";
 import CheckoutItemCard from "./CheckoutItemCard";
+import {selectFirstName, selectLastName, selectModeOfDelivery, selectAddress, selectModeOfPayment, selectEmail, selectPhone} from "../store/customerDetailsState";
 
 const Checkout = () => {
     const products = useSelector(selectProducts);
+    const total = useSelector(selectTotal);
+    const firstName = useSelector(selectFirstName);
+    const lastName = useSelector(selectLastName);
+    const modeOfDelivery = useSelector(selectModeOfDelivery);
+    const address = useSelector(selectAddress);
+    const modeOfPayment = useSelector(selectModeOfPayment);
+    const email = useSelector(selectEmail);
+    const phone = useSelector(selectPhone);
+
     return (
+        <>
         <div>
-            <div className={'mt-10 justify-center flex'}>
+            <div className={'mt-5 justify-center flex'}>
                 <h1 className={'text-xl'}>Final Checkout</h1>
+                <div className={'absolute right-80 font-sans font-bold text-xl'}>
+                    <h1>Total: ₹ {total}</h1>
+                </div>
             </div>
-            <div className={'flex flex-wrap w-11/12 mx-auto justify-center'}>
-                {
-                    products.map((product, index) => <CheckoutItemCard key={index} item={product}/>)
-                }
+            <div className={'flex-col flex mt-10'}>
+                <h1 className={'text-xl mx-auto'}>Selected Products</h1>
+                <div className={'flex flex-wrap mx-auto pb-5 w-11/12 justify-center border-b-2 border-neutral-200'}>
+                    {
+                        products.map((product, index) => <CheckoutItemCard key={index} item={product}/>)
+                    }
+                </div>
+
+
             </div>
+
         </div>
+    <h1 className={'text-xl mx-auto mt-10'}>Customer Details</h1>
+    <div className={'flex flex-col font-sans text-xl w-auto ml-40'}>
+        <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Name:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{`${firstName} ${lastName}`}</h1>
+        </div>
+        <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Phone:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{phone}</h1>
+        </div>
+        {email && <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Email:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{email}</h1>
+        </div>}
+        <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Mode of Delivery:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{modeOfDelivery}</h1>
+        </div>
+        {address && <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Address:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{address}</h1>
+        </div>}
+        <div className={'flex my-2 flex-row justify-center'}>
+            <h1 className={'w-40'}>Mode of Payment:</h1>
+            <h1 className={'w-80 font-bold ml-2'}>{modeOfPayment}</h1>
+        </div>
+
+
+    </div>
+        </>
 
     )
 }

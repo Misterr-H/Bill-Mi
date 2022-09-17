@@ -102,11 +102,17 @@ const AddProducts = () => {
 
 
             <div className={'fixed bottom-10 right-10'}>
-                <ThemeProvider theme={theme}>
-                    <Fab className={'hover:text-white text-black duration-200 ' + fabState} color="primary" aria-label="add">
+                {/*<ThemeProvider theme={theme}>*/}
+                    <Fab sx={{
+                        backgroundColor: 'white',
+                        color: 'black',
+                        ":hover": {
+                            backgroundColor: 'black',
+                        }
+                    }} className={'hover:text-white text-black duration-200 ' + fabState} color="primary" aria-label="add">
                         <MicNoneIcon />
                     </Fab>
-                </ThemeProvider>
+                {/*</ThemeProvider>*/}
             </div>
         </div>
     )

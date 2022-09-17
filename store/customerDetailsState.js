@@ -8,7 +8,7 @@ const initialState = {
     phone: '',
     address: '',
     modeOfDelivery: 'pickup',
-    modeOfPayment: '',
+    modeOfPayment: 'cash',
 }
 
 export const customerDetailsState = createSlice({
