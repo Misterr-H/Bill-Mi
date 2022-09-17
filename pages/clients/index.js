@@ -80,7 +80,14 @@ const Clients = () => {
                 <link rel="icon" href="/logo.svg" />
             </Head>
             <div className={'container p-4 mt-10 rounded-lg border-2 border-neutral-200 shadow-2xl mx-auto'}>
-                <Table columns={columns} dataSource={data}/>
+                <Table columns={columns} dataSource={data.reverse()} loading={{
+                    spinning: data.length === 0,
+                    indicator: <div className="flex justify-center items-center">
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                    </div>
+                }} scroll={{
+                    x: 1000,
+                }}/>
             </div>
 
         </div>
