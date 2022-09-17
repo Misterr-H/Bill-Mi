@@ -2,6 +2,8 @@ import connectDB from "../../../utils/connectDB";
 import Invoice from "../../../models/InvoiceModel";
 import Stats from "../../../models/statsModel";
 import DateWiseRevenue from "../../../models/DateWiseRevenueModel";
+import Client from "../../../models/ClientModel";
+import User from "../../../models/UserModel";
 import VerifyJWT from "../auth/verify-jwt";
 
 export default async function NewInvoice(req, res) {
