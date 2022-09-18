@@ -2,7 +2,8 @@ import Head from "next/head";
 import {Table} from "antd";
 import {useEffect, useState} from "react";
 import {headers} from "../../utils/Auth";
-import ClearIcon from '@mui/icons-material/Clear';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import {Tooltip} from "@mui/material";
 
 const Clients = () => {
     const columns = [
@@ -61,9 +62,13 @@ const Clients = () => {
                     address: client.address ? client.address : "N/A",
                     modeOfDelivery: client.modeOfDelivery,
                     modeOfPayment: client.modeOfPayment,
-                    //One circular button for delete with icon
-                    action: <div className="flex justify-center items-center w-8 h-8 rounded-full bg-red-200 cursor-pointer">
-                        <ClearIcon className="text-red-600"/>
+                    //View invoice button
+                    action: <div className="flex w-min justify-center">
+                        <div className="flex justify-center items-center w-8 h-8 rounded-full bg-gray-200 mr-2 cursor-pointer">
+                            <Tooltip title={'View Invoices'}>
+                                <RemoveRedEyeIcon className="text-gray-500"/>
+                            </Tooltip>
+                        </div>
                     </div>
 
                 }]);

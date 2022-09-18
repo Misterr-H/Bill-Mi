@@ -55,9 +55,6 @@ const Invoices = () => {
                         <div className="flex justify-center items-center w-8 h-8 rounded-full bg-gray-200 mr-2 cursor-pointer">
                             <CloudDownloadIcon className="text-gray-500"/>
                         </div>
-                        <div className="flex justify-center items-center w-8 h-8 rounded-full bg-red-200 cursor-pointer">
-                            <ClearIcon className="text-red-600"/>
-                        </div>
                     </div>  ,
 
                 }]);
