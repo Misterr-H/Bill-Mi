@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {headers} from "../../utils/Auth";
 import ClearIcon from '@mui/icons-material/Clear';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import {Tooltip} from "@mui/material";
 
 const Invoices = () => {
     const columns = [
@@ -53,7 +54,9 @@ const Invoices = () => {
                     //Two circular buttons for download and delete with icons
                     action: <div className="flex w-min justify-center">
                         <div className="flex justify-center items-center w-8 h-8 rounded-full bg-gray-200 mr-2 cursor-pointer">
-                            <CloudDownloadIcon className="text-gray-500"/>
+                            <Tooltip title={'Download Invoice'}>
+                                <CloudDownloadIcon className="text-gray-500"/>
+                            </Tooltip>
                         </div>
                     </div>  ,
 
