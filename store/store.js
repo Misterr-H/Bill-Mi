@@ -1,12 +1,14 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
 import choosedProductsState from "./choosedProductsState";
 import customerDetailsState from "./customerDetailsState";
+import sendingOptionsState from "./sendingOptionsState";
 import {HYDRATE, createWrapper} from "next-redux-wrapper";
 import {combineReducers} from "@reduxjs/toolkit";
 
 const allReducers = combineReducers({
     choosedProductsState,
-    customerDetailsState
+    customerDetailsState,
+    sendingOptionsState
 });
 
 

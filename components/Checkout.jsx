@@ -1,9 +1,11 @@
 import {selectProducts, selectTotal} from "../store/choosedProductsState";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import CheckoutItemCard from "./CheckoutItemCard";
 import {selectFirstName, selectLastName, selectModeOfDelivery, selectAddress, selectModeOfPayment, selectEmail, selectPhone} from "../store/customerDetailsState";
+import {setWhatsApp, setEmail, sendEmail, selectWhatsApp} from "../store/sendingOptionsState";
 
 const Checkout = () => {
+    const dispatch = useDispatch();
     const products = useSelector(selectProducts);
     const total = useSelector(selectTotal);
     const firstName = useSelector(selectFirstName);
@@ -13,6 +15,8 @@ const Checkout = () => {
     const modeOfPayment = useSelector(selectModeOfPayment);
     const email = useSelector(selectEmail);
     const phone = useSelector(selectPhone);
+    const SendEmail = useSelector(sendEmail);
+    const SendWhatsApp = useSelector(selectWhatsApp);
 
     return (
         <>
@@ -64,6 +68,23 @@ const Checkout = () => {
 
 
     </div>
+        {/*    checkbox for sending invoice on email and whatsapp*/}
+        <div className={'flex items-center flex-col mb-40 w-1/2 mx-auto mt-10'}>
+            <div className={'flex w-96 flex-row'}>
+                <input type={'checkbox'} checked={!email ? false : null} disabled={email ? false : true} className={'w-5 h-5'} onChange={(e) => {
+                    dispatch(setEmail(e.target.checked))
+                }}/>
+                <h1 className={'ml-2'}>Send Invoice on Email</h1>
+                {!email && <h1 className={'ml-2 text-red-500'}>(email required)</h1>}
+            </div>
+            <div className={'flex w-96 flex-row'} >
+                <input type={'checkbox'} onChange={(e) => {
+                    dispatch(setWhatsApp(e.target.checked))
+                }} className={'w-5 h-5'}/>
+                <h1 className={'ml-2'}>Send Invoice on Whatsapp</h1>
+            </div>
+        </div>
+
         </>
 
     )

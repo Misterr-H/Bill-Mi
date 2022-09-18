@@ -37,16 +37,22 @@ const AddProducts = () => {
                 <title>New Invoice</title>
                 <link rel="icon" href="/logo.svg" />
             </Head>
-            <div className={'flex flex-col items-center'}>
+            <div className={'flex flex-col items-center -z-50'}>
                 <div className={'flex flex-row justify-center mt-5'}>
                     <h1 className={'text-xl'}>Select Products</h1>
-                    <div className={'absolute flex flex-col right-40'}>
-                        <h1 className={'text-lg'}>Total: ₹ {Total}</h1>
-                        <h1 className={'text-lg'}>Total Products: {TotalQuantity}</h1>
+                    <div className={'absolute flex flex-col right-0 md:right-40'}>
+                        <h1 className={'text-xs md:text-lg'}>Total: ₹ {Total}</h1>
+                        <h1 className={'text-xs md:text-lg'}>Total Products: {TotalQuantity}</h1>
                     </div>
                 </div>
-                <div className={'flex row mt-10 items-center'}>
-                    <Tabs defaultActiveKey="1" centered tabBarExtraContent={clearAddedItems}>
+                <div className={'flex w-fit flex-wrap overflow-scroll mt-10'}>
+
+                    <Tabs defaultActiveKey="1"
+                          tabBarExtraContent={clearAddedItems}
+                          scrollable={true}
+                          className={'overflow-scroll'}
+                          centered
+                    >
                         <Tabs.TabPane tab="TV" key="1">
                             <div className={'flex flex-row flex-wrap justify-center w-2/3 mx-auto'}>
                                 {

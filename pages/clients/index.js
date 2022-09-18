@@ -1,11 +1,17 @@
 import Head from "next/head";
-import {Table} from "antd";
+import {Modal, Table} from "antd";
 import {useEffect, useState} from "react";
 import {headers} from "../../utils/Auth";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import {Tooltip} from "@mui/material";
+import {columns as col, handleDownloadInvoice} from "../invoices/index";
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+
 
 const Clients = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [modalData, setModalData] = useState([]);
+
     const columns = [
         {
             title: 'Client',
@@ -66,7 +72,30 @@ const Clients = () => {
                     action: <div className="flex w-min justify-center">
                         <div className="flex justify-center items-center w-8 h-8 rounded-full bg-gray-200 mr-2 cursor-pointer">
                             <Tooltip title={'View Invoices'}>
-                                <RemoveRedEyeIcon className="text-gray-500"/>
+                                <RemoveRedEyeIcon onClick={() => {
+                                    setIsModalVisible(true);
+                                    setModalData(client.invoices.map((invoice, index) => {
+                                        return {
+                                            key: index,
+                                            client: client.firstName + " " + client.lastName,
+                                            date: invoice.date.split("T")[0].split("-").reverse().join("/"),
+                                            amount: invoice.total,
+                                            status: "Paid",
+                                            //Two circular buttons for download and delete with icons
+                                            action: <div className="flex w-min justify-center">
+                                                <div className="flex justify-center items-center w-8 h-8 rounded-full bg-gray-200 mr-2 cursor-pointer">
+                                                    <Tooltip title={'Download Invoice'}>
+                                                        <CloudDownloadIcon className="text-gray-500" onClick={() => {
+                                                            console.log(invoice);
+                                                            handleDownloadInvoice(invoice)
+                                                             }
+                                                        }/>
+                                                    </Tooltip>
+                                                </div>
+                                            </div>  ,
+                                        }
+                                    }));}
+                                } className="text-gray-500"/>
                             </Tooltip>
                         </div>
                     </div>
@@ -94,7 +123,22 @@ const Clients = () => {
                     x: 1000,
                 }}/>
             </div>
-
+            <Modal
+                title="Invoices"
+                open={isModalVisible}
+                onOk={() => setIsModalVisible(false)}
+                onCancel={() => setIsModalVisible(false)}
+                width={"100%"}
+            >
+                <Table columns={col} dataSource={modalData} loading={{
+                    spinning: data.length === 0,
+                    indicator: <div className="flex justify-center items-center">
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                    </div>
+                }} scroll={{
+                    x: 1000,
+                }}/>
+            </Modal>
         </div>
     )
 }

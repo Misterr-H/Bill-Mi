@@ -12,7 +12,76 @@ import {selectProducts, selectTotal, selectTotalQuantity, clearProducts} from ".
 import {useSelector, useDispatch} from "react-redux";
 import { selectLastName, clearDetails, selectAddress, selectEmail, selectPhone, selectFirstName, selectModeOfDelivery, selectModeOfPayment} from "../../store/customerDetailsState";
 import axios from "axios";
-import {headers} from "../../utils/Auth";
+import {selectWhatsApp, sendEmail} from "../../store/sendingOptionsState";
+import {getStoreDetails, headers} from "../../utils/Auth";
+import easyinvoice from "easyinvoice";
+import {SMTPClient} from "emailjs";
+
+
+const uploadInvoice = (invoice) => {
+    const data = {
+        "settings": {
+            "currency": "INR",
+        },
+        "taxNotation": "gst", //or gst
+        "marginTop": 25,
+        "marginRight": 25,
+        "marginLeft": 25,
+        "marginBottom": 25,
+        "images": {
+            "logo": "https://www.freepnglogos.com/uploads/xiaomi-png/xiaomi-logo-logos-marcas-8.png", //or base64
+
+        },
+        "sender": {
+            "company": "Xiaomi",
+            "address": getStoreDetails().storeName,
+            "city": getStoreDetails().storeCity,
+            "country": getStoreDetails().storeState,
+            // "custom1": "custom value 1",
+            // "custom2": "custom value 2",
+            // "custom3": "custom value 3"
+        },
+        "client": {
+            "company": invoice.client.firstName + " " + invoice.client.lastName,
+            "address": invoice.client.address,
+            "zip":"",
+            "city":"",
+            "country": ""
+            // "custom1": "custom value 1",
+            // "custom2": "custom value 2",
+            // "custom3": "custom value 3"
+        },
+        "information": {
+            "number": invoice.invoiceNumber.split("-")[1],
+            "date": invoice.date.split("T")[0],
+            "due-date": "Paid",
+        },
+        //build products array from invoice items
+        "products": invoice.items.map((item) => {
+            return {
+                "quantity": item.quantity,
+                "description": item.name,
+                "tax-rate": 0,
+                "price": item.price
+            }}),
+        "bottom-notice": "Thank you for shopping with us.",
+        "translate": {
+            "due-date": "Status",
+        }
+    };
+    console.log(data);
+    easyinvoice.createInvoice(data, async function (result) {
+
+        const res = await fetch('/api/invoice/save-invoice', {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({pdf: result.pdf, invoiceId: invoice.invoiceNumber})
+        });
+        const data = await res.json();
+        console.log("Upload log here",data);
+
+    });
+}
 
 const NewInvoice = () => {
     const dispatch = useDispatch();
@@ -26,6 +95,8 @@ const NewInvoice = () => {
     const ModeOfDelivery = useSelector(selectModeOfDelivery);
     const ModeOfPayment = useSelector(selectModeOfPayment);
     const TotalQuantity = useSelector(selectTotalQuantity);
+    const WhatsApp = useSelector(selectWhatsApp);
+    const SendEmail = useSelector(sendEmail);
 
     const [activeTab, setActiveTab] = useState(0);
     const [showSnackbar, setShowSnackbar] = useState(false);
@@ -65,9 +136,26 @@ const NewInvoice = () => {
         })
         .then(res => {
             console.log(res);
+            uploadInvoice(res.data.data);
             setSnackbarMessage("Invoice created successfully");
             setShowSnackbar(true);
             setLoading(false);
+            //open new tab with whatsapp api key
+            if(WhatsApp) {
+                window.open(`https://wa.me/91${Phone}?text=Your%20invoice%20is%20ready%20at%20https://bill-mi.vercel.app/invoices/${res.data.data.invoiceNumber}.pdf`, "_blank");
+            }
+            //send email to client using api
+            if(SendEmail) {
+                fetch('/api/send-invoice', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({email: Email, invoiceId: res.data.data.invoiceNumber})
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+            }
         })
         .catch(err => {
             console.log(err);
@@ -140,7 +228,7 @@ const NewInvoice = () => {
                                 backgroundColor: 'black',
                             },
                             zIndex: 1000
-                        }} className={'hover:text-white text-black duration-200 '} variant={activeTab === 2 && !loading ? 'extended' : 'circular'} color="primary" aria-label="add">
+                        }} className={'hover:text-white z-50 text-black duration-200 '} variant={activeTab === 2 && !loading ? 'extended' : 'circular'} color="primary" aria-label="add">
                             {activeTab === 2 && !loading ? 'Create Invoice' : ''}
                             {loading ? <CircularProgress/> : <ArrowForwardIosIcon/>}
                         </Fab>
