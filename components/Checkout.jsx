@@ -69,21 +69,21 @@ const Checkout = () => {
 
     </div>
         {/*    checkbox for sending invoice on email and whatsapp*/}
-        <div className={'flex items-center flex-col mb-40 w-1/2 mx-auto mt-10'}>
-            <div className={'flex w-96 flex-row'}>
-                <input type={'checkbox'} checked={!email ? false : null} disabled={email ? false : true} className={'w-5 h-5'} onChange={(e) => {
-                    dispatch(setEmail(e.target.checked))
-                }}/>
-                <h1 className={'ml-2'}>Send Invoice on Email</h1>
-                {!email && <h1 className={'ml-2 text-red-500'}>(email required)</h1>}
-            </div>
-            <div className={'flex w-96 flex-row'} >
-                <input type={'checkbox'} onChange={(e) => {
-                    dispatch(setWhatsApp(e.target.checked))
-                }} className={'w-5 h-5'}/>
-                <h1 className={'ml-2'}>Send Invoice on Whatsapp</h1>
-            </div>
-        </div>
+        {/*<div className={'flex items-center flex-col mb-40 w-1/2 mx-auto mt-10'}>*/}
+        {/*    <div className={'flex w-96 flex-row'}>*/}
+        {/*        <input type={'checkbox'} checked={!email ? false : null} disabled={email ? false : true} className={'w-5 h-5'} onChange={(e) => {*/}
+        {/*            dispatch(setEmail(e.target.checked))*/}
+        {/*        }}/>*/}
+        {/*        <h1 className={'ml-2'}>Send Invoice on Email</h1>*/}
+        {/*        {!email && <h1 className={'ml-2 text-red-500'}>(email required)</h1>}*/}
+        {/*    </div>*/}
+        {/*    <div className={'flex w-96 flex-row'} >*/}
+        {/*        <input type={'checkbox'} onChange={(e) => {*/}
+        {/*            dispatch(setWhatsApp(e.target.checked))*/}
+        {/*        }} className={'w-5 h-5'}/>*/}
+        {/*        <h1 className={'ml-2'}>Send Invoice on Whatsapp</h1>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
 
         </>
 
