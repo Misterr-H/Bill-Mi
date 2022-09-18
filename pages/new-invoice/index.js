@@ -15,7 +15,6 @@ import axios from "axios";
 import {selectWhatsApp, sendEmail} from "../../store/sendingOptionsState";
 import {getStoreDetails, headers} from "../../utils/Auth";
 import easyinvoice from "easyinvoice";
-import {SMTPClient} from "emailjs";
 
 
 const uploadInvoice = (invoice) => {
